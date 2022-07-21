@@ -1,0 +1,11 @@
+.pageContainer {
+  @apply container p-6 mx-auto;
+}
+
+.header {
+  @apply mb-6;
+}
+
+.headerTitle {
+  @apply font-black text-4xl;
+}
