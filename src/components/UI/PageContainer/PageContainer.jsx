@@ -1,11 +1,8 @@
 import styles from './PageContainer.module.scss';
 
-const PageContainer = ({ children, title }) => {
+const PageContainer = ({ children = null }) => {
   return (
     <div className={styles.pageContainer}>
-      <header className={styles.header}>
-        <h2 className={styles.headerTitle}>{title}</h2>
-      </header>
       <main>{children}</main>
     </div>
   );

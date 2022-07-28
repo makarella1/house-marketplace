@@ -1,25 +1,26 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { useToast } from '../../hooks/useToast';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-
-import { toast } from 'react-toastify';
 
 import { Link, useNavigate } from 'react-router-dom';
 
 import { BsArrowRightShort, BsFillPersonFill } from 'react-icons/bs';
 import { AiFillEye } from 'react-icons/ai';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import PageContainer from '../../components/UI/PageContainer';
+import PageContainer from '../../components/UI/PageContainer/PageContainer';
+import PageHeader from '../../components/UI/PageHeader/PageHeader';
+import OAuth from '../../components/OAuth/OAuth';
 
 import styles from './SignIn.module.scss';
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
+  const showToast = useToast();
 
   const { email, password } = formData;
-
-  const navigate = useNavigate();
 
   const passwordVisibilityHandler = () => {
     setShowPassword((prevState) => !prevState);
@@ -48,12 +49,13 @@ const SignIn = () => {
         navigate('/');
       }
     } catch (error) {
-      toast.error('Wrong Credentials!');
+      showToast('error', 'Wrong Credentials!');
     }
   };
 
   return (
-    <PageContainer title="Welcome Back!">
+    <PageContainer>
+      <PageHeader title="Welcome Back!" />
       <form className={styles.form} onSubmit={submitHandler}>
         <div className={styles.formControl}>
           <BsFillPersonFill className={styles.icon} size={20} />
@@ -100,6 +102,8 @@ const SignIn = () => {
             Sign Up Instead
           </Link>
         </div>
+
+        <OAuth />
       </form>
     </PageContainer>
   );

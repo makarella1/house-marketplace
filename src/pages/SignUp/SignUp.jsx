@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { useToast } from '../../hooks/useToast';
 
 import {
   getAuth,
@@ -10,12 +11,12 @@ import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-import { toast } from 'react-toastify';
-
 import { BsArrowRightShort, BsFillPersonFill, BsPenFill } from 'react-icons/bs';
 import { AiFillEye } from 'react-icons/ai';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import PageContainer from '../../components/UI/PageContainer';
+import PageContainer from '../../components/UI/PageContainer/PageContainer';
+import PageHeader from '../../components/UI/PageHeader/PageHeader';
+import OAuth from '../../components/OAuth/OAuth';
 
 import styles from './SignUp.module.scss';
 
@@ -26,10 +27,10 @@ const SignUp = () => {
     password: '',
     name: '',
   });
+  const navigate = useNavigate();
+  const showToast = useToast();
 
   const { email, password, name } = formData;
-
-  const navigate = useNavigate();
 
   const passwordVisibilityHandler = () => {
     setShowPassword((prevState) => !prevState);
@@ -67,13 +68,16 @@ const SignUp = () => {
       await setDoc(doc(db, 'users', user.uid), formDataCopy);
 
       navigate('/');
+
+      showToast('success', 'Welcome! Make yourself at home :)');
     } catch (error) {
-      toast.error('Something went wrong with registration!');
+      showToast('error', 'Something went wrong with the registration!');
     }
   };
 
   return (
-    <PageContainer title="Hey There!">
+    <PageContainer>
+      <PageHeader title="Welcome Back!" />
       <form className={styles.form} onSubmit={submitHandler}>
         <div className={styles.formControl}>
           <BsPenFill className={styles.icon} size={20} />
@@ -126,6 +130,8 @@ const SignUp = () => {
             Sign In Instead
           </Link>
         </div>
+
+        <OAuth />
       </form>
     </PageContainer>
   );

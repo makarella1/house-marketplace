@@ -1,0 +1,15 @@
+.oauth {
+  @apply mt-10 flex items-center justify-center w-full mx-auto;
+}
+
+.googleAuth {
+  @apply flex flex-col items-center;
+}
+
+.authTitle {
+  @apply font-bold mb-2;
+}
+
+.authBtn {
+  @apply w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center;
+}

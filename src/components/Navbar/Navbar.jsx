@@ -3,8 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { MdOutlineLocalOffer, MdOutlineExplore } from 'react-icons/md';
 import { BsPerson } from 'react-icons/bs';
 
-import styles from './Navbar.module.scss';
-
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
