@@ -1,0 +1,19 @@
+.heading {
+  @apply font-bold text-xl my-6;
+}
+
+.categories {
+  @apply flex justify-between;
+
+  a {
+    @apply w-[48%];
+  }
+}
+
+.categoryImg {
+  @apply rounded-lg object-cover w-full min-h-[120px] h-[15vw] mx-auto;
+}
+
+.categoryName {
+  @apply font-bold text-lg my-6 text-left;
+}

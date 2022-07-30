@@ -46,6 +46,7 @@ const SignIn = () => {
       );
 
       if (userCredentials.user) {
+        showToast('success', 'Welcome!');
         navigate('/');
       }
     } catch (error) {

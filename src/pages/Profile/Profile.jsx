@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 import { useToast } from '../../hooks/useToast';
 
 import { getAuth, updateProfile } from 'firebase/auth';
 import { doc, updateDoc } from 'firebase/firestore';
-
 import { db } from '../../config/firebase.config';
 
+import { AiFillHome } from 'react-icons/ai';
+import { BsArrowRightShort } from 'react-icons/bs';
 import PageContainer from '../../components/UI/PageContainer/PageContainer';
 import PageHeader from '../../components/UI/PageHeader/PageHeader';
 
@@ -112,6 +112,15 @@ const Profile = () => {
           />
         </div>
       </form>
+
+      <Link
+        className="rounded-lg p-4 shadow-lg flex justify-between items-center bg-primary"
+        to="/create-listing"
+      >
+        <AiFillHome size={20} />
+        <p className="font-bold">Rent or sell your home!</p>
+        <BsArrowRightShort size={20} />
+      </Link>
     </PageContainer>
   );
 };

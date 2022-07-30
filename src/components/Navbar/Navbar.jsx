@@ -29,7 +29,7 @@ const Navbar = () => {
         onClick={() => navigate('/offers')}
       >
         <MdOutlineLocalOffer size={24} />
-        <span className="btm-nav-label">Offer</span>
+        <span className="btm-nav-label">Offers</span>
       </button>
       <button
         className={`${matchPath('/') ? 'active' : ''}`}

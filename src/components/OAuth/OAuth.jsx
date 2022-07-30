@@ -18,8 +18,7 @@ const OAuth = () => {
     try {
       const auth = getAuth();
       const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+      const { user } = await signInWithPopup(auth, provider);
 
       const userRef = doc(db, 'users', user.uid);
       const docSnap = await getDoc(userRef);
@@ -36,7 +35,14 @@ const OAuth = () => {
 
       showToast('success', "You've successfully authorized with Google!");
     } catch (error) {
-      showToast('error', "Couldn't authorize with Google :(");
+      if (
+        error.code === 'auth/cancelled-popup-request' ||
+        error.code === 'auth/popup-closed-by-user'
+      ) {
+        return;
+      } else {
+        showToast('error', "Couldn't authorize with Google :(");
+      }
     }
   };
 
@@ -46,7 +52,11 @@ const OAuth = () => {
         <p className={styles.authTitle}>
           Sign {location.pathname === '/sign-in' ? 'in' : 'up'} with
         </p>
-        <button className={styles.authBtn} onClick={googleAuthHandler}>
+        <button
+          className={styles.authBtn}
+          onClick={googleAuthHandler}
+          type="button"
+        >
           <FcGoogle size={30} />
         </button>
       </div>

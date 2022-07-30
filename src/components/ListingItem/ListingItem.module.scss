@@ -1,0 +1,39 @@
+.listing {
+  @apply flex justify-between mb-4;
+}
+
+.listingLink {
+  @apply contents;
+}
+
+.listingImg {
+  @apply object-cover w-[30%] h-24 rounded-lg lg:w-[19%] lg:h-52;
+}
+
+.info {
+  @apply w-[65%] lg:w-[79%] flex flex-col;
+}
+
+.location {
+  @apply font-semibold text-xs opacity-80;
+}
+
+.name {
+  @apply font-black md:text-xl lg:text-2xl;
+}
+
+.price {
+  @apply font-bold text-accent text-lg lg:text-xl my-1;
+}
+
+.subInfo {
+  @apply flex justify-between items-center max-w-xs mt-auto;
+}
+
+.icon {
+  @apply hidden xs:inline;
+}
+
+.subInfoText {
+  @apply font-semibold text-sm;
+}
