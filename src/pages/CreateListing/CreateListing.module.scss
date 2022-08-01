@@ -1,0 +1,47 @@
+.form {
+  @apply mb-24;
+}
+
+.label {
+  @apply block font-black text-lg mt-4;
+}
+
+.flex {
+  display: flex;
+}
+
+.formInput {
+  @apply input input-sm font-semibold mt-2 max-w-xl w-full input-success;
+}
+
+.formInputSmall {
+  @apply input input-md font-semibold mt-2 w-full max-w-2xl input-success;
+}
+
+.formInputContainer {
+  @apply flex flex-col items-center justify-center mr-4;
+}
+
+.textarea {
+  @apply p-2 border border-success outline-none rounded-lg font-bold;
+}
+
+.formInputMedium {
+  @apply input input-md font-semibold mt-2 w-full max-w-xs input-success;
+}
+
+.text {
+  @apply font-bold text-lg block sm:inline;
+}
+
+.formFiles {
+  @apply input input-success py-2 cursor-pointer w-full max-w-xs;
+}
+
+.formFiles::-webkit-file-upload-button {
+  @apply rounded-lg outline-none bg-success border-none cursor-pointer;
+}
+
+.submitBtn {
+  @apply p-6 btn-wide font-bold text-xl block mt-6 rounded-xl;
+}

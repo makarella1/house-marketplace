@@ -9,6 +9,7 @@ import SignUp from './pages/SignUp/SignUp';
 import Navbar from './components/Navbar/Navbar';
 import Category from './pages/Category/Category';
 import CreateListing from './pages/CreateListing/CreateListing';
+import ListingPage from './pages/ListingPage/ListingPage';
 
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
@@ -25,6 +26,10 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="/categories/:categoryName" element={<Category />} />
+        <Route
+          path="/categories/:categoryName/:listingId"
+          element={<ListingPage />}
+        />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/create-listing" element={<ProtectedRoute />}>
