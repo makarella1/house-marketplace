@@ -10,7 +10,7 @@ const ListingItem = ({ listing, id }) => {
     <li className={styles.listing}>
       <Link
         className={styles.listingLink}
-        to={`/category/${listing.type}/${id}`}
+        to={`/categories/${listing.type}/${id}`}
       >
         <img
           className={styles.listingImg}
@@ -21,7 +21,9 @@ const ListingItem = ({ listing, id }) => {
           <p className={styles.location}>{location}</p>
           <p className={styles.name}>{listing.name}</p>
           <p className={styles.price}>
-            {listing.offer ? `$${listing.discountedPrice}` : `${listing.price}`}
+            {listing.offer
+              ? `$${listing.discountedPrice}`
+              : `$${listing.regularPrice}`}
             {listing.type === 'rent' && ' / Month'}
           </p>
           <div className={styles.subInfo}>

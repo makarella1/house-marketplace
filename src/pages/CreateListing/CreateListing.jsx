@@ -93,7 +93,7 @@ const CreateListing = () => {
       const results = await response.json();
 
       geolocation.lat = results.data[0]?.latitude;
-      geolocation.lng = results.data[0]?.latitude;
+      geolocation.lng = results.data[0]?.longitude;
 
       location =
         results.data[0]?.length === 0 ? undefined : results.data[0]?.label;
@@ -151,7 +151,7 @@ const CreateListing = () => {
     const docRef = await addDoc(collection(db, 'listings'), formCopy);
     setIsLoading(false);
     showToast('success', 'Listing saved!');
-    navigate(`/category/${formCopy.type}/${docRef.id}`);
+    navigate(`/categories/${formCopy.type}/${docRef.id}`);
   };
 
   const inputChangeHandler = (event) => {

@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <footer className="btm-nav drop-shadow-2xl">
+    <footer className="z-[9999] btm-nav drop-shadow-2xl ">
       <button
         className={`${matchPath('/profile') ? 'active' : ''}`}
         onClick={() => navigate('/profile')}

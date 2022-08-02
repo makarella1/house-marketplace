@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import ExploreSwiper from '../../components/ExploreSwiper/ExploreSwiper';
 import PageContainer from '../../components/UI/PageContainer/PageContainer';
 import PageHeader from '../../components/UI/PageHeader/PageHeader';
 
@@ -30,6 +31,7 @@ const Explore = () => {
           <p className={styles.categoryName}>Places for sale</p>
         </Link>
       </div>
+      <ExploreSwiper />
     </PageContainer>
   );
 };
