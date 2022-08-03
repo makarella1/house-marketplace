@@ -7,11 +7,12 @@ import { useToast } from '../../hooks/useToast';
 
 import { FaShareAlt } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import ListingMap from '../../components/ListingMap/ListingMap';
 import PageHeader from '../../components/UI/PageHeader/PageHeader';
 import PageContainer from '../../components/UI/PageContainer/PageContainer';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import LinkAlert from '../../components/UI/LinkAlert/LinkAlert';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -80,9 +81,12 @@ const ListingPage = () => {
         className="mb-4"
         slidesPerView={1}
         pagination={{ clickable: true }}
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+        autoplay={{
+          delay: 2000,
+        }}
       >
-        {listing?.imageUrls.map((url, index) => {
+        {listing?.imageUrls.map((_, index) => {
           return (
             <SwiperSlide key={index}>
               <div
@@ -96,17 +100,7 @@ const ListingPage = () => {
           );
         })}
       </Swiper>
-      {isLinkCopied && (
-        <div className="toast bottom-16 right-0 lg:bottom-20 lg:right-5">
-          <div className="alert alert-sucess">
-            <div>
-              <span className="font-bold">
-                The link was copied to your clipboard!
-              </span>
-            </div>
-          </div>
-        </div>
-      )}
+      {isLinkCopied && <LinkAlert />}
       <p className="text-success font-bold text-2xl">
         {listing?.offer
           ? `$${listing?.discountedPrice}`

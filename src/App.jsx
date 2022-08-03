@@ -11,6 +11,7 @@ import Category from './pages/Category/Category';
 import CreateListing from './pages/CreateListing/CreateListing';
 import ListingPage from './pages/ListingPage/ListingPage';
 import Contact from './pages/Contact/Contact';
+import EditListing from './pages/EditListing/EditListing';
 
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/create-listing" element={<CreateListing />} />
         </Route>
         <Route path="/contact/:landlordId" element={<Contact />} />
+        <Route path="/edit-listing/:listingId" element={<EditListing />} />
       </Routes>
       <Navbar />
       <ToastContainer pauseOnHover={false} />

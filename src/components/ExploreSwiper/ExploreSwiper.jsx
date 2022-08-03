@@ -46,11 +46,11 @@ const ExploreSwiper = () => {
                 }}
                 className="h-96 w-full mx-auto rounded-lg relative"
               >
-                <div className="absolute bottom-10 left-10 flex flex-col">
-                  <p className="badge badge-primary badge-lg p-6 font-black text-white text-lg mb-2">
+                <div className="absolute bottom-10 left-5 flex flex-col lg:left-10">
+                  <p className="badge badge-primary badge-lg font-black text-white text-lg mb-2 lg:p-6">
                     {listing?.name}
                   </p>
-                  <p className="badge badge-success badge-lg font-black p-6 text-white text-lg">
+                  <p className="badge badge-success badge-lg font-black text-white text-lg lg:p-6">
                     ${listing?.regularPrice ?? listing?.discountedPrice}{' '}
                     {listing?.type === 'rent' && '/ Per Month'}
                   </p>

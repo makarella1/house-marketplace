@@ -22,6 +22,7 @@ const Category = () => {
   const { categoryName } = useParams();
   const [listings, setListings] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [lastFetchedListing, setLastFetchedListing] = useState(null);
   const showToast = useToast();
 
   useEffect(() => {
@@ -38,7 +39,10 @@ const Category = () => {
 
         const querySnap = await getDocs(q);
 
-        let listings = [];
+        const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+        setLastFetchedListing(lastVisible);
+
+        const listings = [];
 
         querySnap.forEach((doc) => {
           return listings.push({
@@ -58,21 +62,67 @@ const Category = () => {
     fetchListings();
   }, [categoryName]);
 
+  const loadMoreHandler = async () => {
+    try {
+      const listingsRef = collection(db, 'listings');
+
+      const q = query(
+        listingsRef,
+        where('type', '==', categoryName),
+        orderBy('timestamp'),
+        startAfter(lastFetchedListing),
+        limit(10)
+      );
+
+      const querySnap = await getDocs(q);
+
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+      setLastFetchedListing(lastVisible);
+
+      const listings = [];
+
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setListings((prevState) => [...prevState, ...listings]);
+
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+      showToast('error', "Couldn't fetch the data");
+    }
+  };
+
   return (
     <PageContainer>
       <PageHeader title={`Places for ${categoryName}`} />
       {isLoading ? (
         <Spinner />
       ) : listings && listings.length > 0 ? (
-        <ul>
-          {listings.map((listing) => (
-            <ListingItem
-              listing={listing.data}
-              id={listing.id}
-              key={listing.id}
-            />
-          ))}
-        </ul>
+        <>
+          <ul className="mb-10">
+            {listings.map((listing) => (
+              <ListingItem
+                listing={listing.data}
+                id={listing.id}
+                key={listing.id}
+              />
+            ))}
+          </ul>
+          {lastFetchedListing && (
+            <button
+              className="btn btn-info w-full btn-sm"
+              onClick={loadMoreHandler}
+            >
+              Load More
+            </button>
+          )}
+        </>
       ) : (
         <p>Found no places for {categoryName}</p>
       )}

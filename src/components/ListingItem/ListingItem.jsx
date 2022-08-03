@@ -1,10 +1,19 @@
-import { FaBath, FaBed } from 'react-icons/fa';
+import { FaBath, FaBed, FaPenAlt } from 'react-icons/fa';
+import { AiFillDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 import styles from './ListingItem.module.scss';
 
-const ListingItem = ({ listing, id }) => {
+const ListingItem = ({ listing, id, onDelete, onEdit }) => {
   const location = listing.location.split(',')[0];
+
+  const deleteHandler = () => {
+    onDelete(id);
+  };
+
+  const editHandler = () => {
+    onEdit(id);
+  };
 
   return (
     <li className={styles.listing}>
@@ -42,6 +51,24 @@ const ListingItem = ({ listing, id }) => {
           </div>
         </div>
       </Link>
+
+      {onDelete && (
+        <button
+          className="absolute right-0 top-1/2 -translate-y-1/2 btn btn-ghost btn-sm"
+          onClick={deleteHandler}
+        >
+          <AiFillDelete color="red" size={16} />
+        </button>
+      )}
+
+      {onEdit && (
+        <button
+          className="absolute right-10 top-1/2 -translate-y-1/2 btn btn-ghost btn-sm"
+          onClick={editHandler}
+        >
+          <FaPenAlt size={16} />
+        </button>
+      )}
     </li>
   );
 };
