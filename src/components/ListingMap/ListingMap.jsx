@@ -1,8 +1,10 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
+import styles from './ListingMap.module.scss';
+
 const ListingMap = ({ lat = 0, lng = 0, location = '' }) => {
   return (
-    <div className="w-full mx-auto h-96 mb-10">
+    <div className={styles.map}>
       <MapContainer
         center={[lat, lng]}
         style={{ width: '100%', height: '100%' }}

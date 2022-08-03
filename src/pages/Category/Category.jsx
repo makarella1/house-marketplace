@@ -18,6 +18,8 @@ import PageHeader from '../../components/UI/PageHeader/PageHeader';
 import ListingItem from '../../components/ListingItem/ListingItem';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
+import styles from './Category.module.scss';
+
 const Category = () => {
   const { categoryName } = useParams();
   const [listings, setListings] = useState(null);
@@ -99,34 +101,33 @@ const Category = () => {
   };
 
   return (
-    <PageContainer>
-      <PageHeader title={`Places for ${categoryName}`} />
-      {isLoading ? (
-        <Spinner />
-      ) : listings && listings.length > 0 ? (
-        <>
-          <ul className="mb-10">
-            {listings.map((listing) => (
-              <ListingItem
-                listing={listing.data}
-                id={listing.id}
-                key={listing.id}
-              />
-            ))}
-          </ul>
-          {lastFetchedListing && (
-            <button
-              className="btn btn-info w-full btn-sm"
-              onClick={loadMoreHandler}
-            >
-              Load More
-            </button>
-          )}
-        </>
-      ) : (
-        <p>Found no places for {categoryName}</p>
-      )}
-    </PageContainer>
+    <>
+      <PageHeader title={`Places for ${categoryName}`} />{' '}
+      <PageContainer>
+        {isLoading ? (
+          <Spinner />
+        ) : listings && listings.length > 0 ? (
+          <>
+            <ul className={styles.list}>
+              {listings.map((listing) => (
+                <ListingItem
+                  listing={listing.data}
+                  id={listing.id}
+                  key={listing.id}
+                />
+              ))}
+            </ul>
+            {lastFetchedListing && (
+              <button className={styles.loadMoreBtn} onClick={loadMoreHandler}>
+                Load More
+              </button>
+            )}
+          </>
+        ) : (
+          <p>Found no places for {categoryName}</p>
+        )}
+      </PageContainer>
+    </>
   );
 };
 

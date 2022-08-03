@@ -63,9 +63,12 @@ const EditListing = () => {
 
   const { currentUser } = getAuth();
 
-  // useEffect(() => {
-  //   if (auth?.currentUser?.uid !== )
-  // }, []);
+  useEffect(() => {
+    if (listing && listing.userRef !== auth.currentUser?.uid) {
+      showToast('error', "You can't edit this listing");
+      navigate('/');
+    }
+  }, []);
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -210,218 +213,219 @@ const EditListing = () => {
   }
 
   return (
-    <PageContainer>
+    <>
       <PageHeader title="Edit Listing" />
-
-      <form className={styles.form} onSubmit={submitHandler}>
-        <label className={styles.label}>Sell / Rent</label>
-        <div className={styles.flex}>
-          <button
-            className={type === 'sale' ? 'formBtnActive' : 'formBtn'}
-            value="sale"
-            name="type"
-            onClick={inputChangeHandler}
-            type="button"
-          >
-            Sell
-          </button>
-          <button
-            className={type === 'rent' ? 'formBtnActive' : 'formBtn'}
-            value="rent"
-            name="type"
-            type="button"
-            onClick={inputChangeHandler}
-          >
-            Rent
-          </button>
-        </div>
-        <label className={styles.label}>Name</label>
-        <div>
-          <input
-            className={styles.formInput}
-            type="text"
-            name="name"
-            value={name}
-            onChange={inputChangeHandler}
-            minLength="10"
-            maxLength="52"
-            required
-          />
-        </div>
-        <div className={styles.flex}>
-          <div className={styles.formInputContainer}>
-            <label className={styles.label}>Bedrooms</label>
+      <PageContainer>
+        <form className={styles.form} onSubmit={submitHandler}>
+          <label className={styles.label}>Sell / Rent</label>
+          <div className={styles.flex}>
+            <button
+              className={type === 'sale' ? 'formBtnActive' : 'formBtn'}
+              value="sale"
+              name="type"
+              onClick={inputChangeHandler}
+              type="button"
+            >
+              Sell
+            </button>
+            <button
+              className={type === 'rent' ? 'formBtnActive' : 'formBtn'}
+              value="rent"
+              name="type"
+              type="button"
+              onClick={inputChangeHandler}
+            >
+              Rent
+            </button>
+          </div>
+          <label className={styles.label}>Name</label>
+          <div>
             <input
-              className={styles.formInputSmall}
-              type="number"
-              name="bedrooms"
-              value={bedrooms}
+              className={styles.formInput}
+              type="text"
+              name="name"
+              value={name}
               onChange={inputChangeHandler}
-              min="1"
-              max="50"
+              minLength="10"
+              maxLength="52"
               required
             />
           </div>
-
-          <div className={styles.formInputContainer}>
-            <label className={styles.label}>Bathrooms</label>
-            <input
-              className={styles.formInputSmall}
-              type="number"
-              name="bathrooms"
-              value={bathrooms}
-              onChange={inputChangeHandler}
-              min="1"
-              max="50"
-              required
-            />
-          </div>
-        </div>
-        <label className={styles.label}>Parking Spot</label>
-        <div className={styles.flex}>
-          <button
-            className={parking ? 'formBtnActive' : 'formBtn'}
-            value={true}
-            name="parking"
-            onClick={inputChangeHandler}
-            type="button"
-          >
-            Yes
-          </button>
-          <button
-            className={
-              !parking && parking !== null ? 'formBtnActive' : 'formBtn'
-            }
-            value={false}
-            name="parking"
-            onClick={inputChangeHandler}
-            type="button"
-          >
-            No
-          </button>
-        </div>
-        <label className={styles.label}>Furnished</label>
-        <div className={styles.flex}>
-          <button
-            className={furnished ? 'formBtnActive' : 'formBtn'}
-            value={true}
-            name="furnished"
-            onClick={inputChangeHandler}
-            type="button"
-          >
-            Yes
-          </button>
-          <button
-            className={
-              !furnished && furnished !== null ? 'formBtnActive' : 'formBtn'
-            }
-            value={false}
-            name="furnished"
-            onClick={inputChangeHandler}
-            type="button"
-          >
-            No
-          </button>
-        </div>
-        <label className={styles.label}>Address</label>
-        <textarea
-          className={styles.textarea}
-          name="address"
-          value={address}
-          onChange={inputChangeHandler}
-          required
-        />
-        {!geolocationEnabled && (
           <div className={styles.flex}>
             <div className={styles.formInputContainer}>
-              <label className={styles.label}>Latitude</label>
+              <label className={styles.label}>Bedrooms</label>
               <input
                 className={styles.formInputSmall}
                 type="number"
-                name="latitude"
-                value={latitude}
+                name="bedrooms"
+                value={bedrooms}
                 onChange={inputChangeHandler}
+                min="1"
+                max="50"
+                required
               />
             </div>
 
             <div className={styles.formInputContainer}>
-              <label className={styles.label}>Longitude</label>
+              <label className={styles.label}>Bathrooms</label>
               <input
                 className={styles.formInputSmall}
                 type="number"
-                name="longitude"
-                value={longitude}
+                name="bathrooms"
+                value={bathrooms}
                 onChange={inputChangeHandler}
+                min="1"
+                max="50"
                 required
               />
             </div>
           </div>
-        )}
-        <label className={styles.label}>Offer</label>
-        <div className={styles.flex}>
-          <button
-            className={offer ? 'formBtnActive' : 'formBtn'}
-            value={true}
-            name="offer"
-            onClick={inputChangeHandler}
-            type="button"
-          >
-            Yes
+          <label className={styles.label}>Parking Spot</label>
+          <div className={styles.flex}>
+            <button
+              className={parking ? 'formBtnActive' : 'formBtn'}
+              value={true}
+              name="parking"
+              onClick={inputChangeHandler}
+              type="button"
+            >
+              Yes
+            </button>
+            <button
+              className={
+                !parking && parking !== null ? 'formBtnActive' : 'formBtn'
+              }
+              value={false}
+              name="parking"
+              onClick={inputChangeHandler}
+              type="button"
+            >
+              No
+            </button>
+          </div>
+          <label className={styles.label}>Furnished</label>
+          <div className={styles.flex}>
+            <button
+              className={furnished ? 'formBtnActive' : 'formBtn'}
+              value={true}
+              name="furnished"
+              onClick={inputChangeHandler}
+              type="button"
+            >
+              Yes
+            </button>
+            <button
+              className={
+                !furnished && furnished !== null ? 'formBtnActive' : 'formBtn'
+              }
+              value={false}
+              name="furnished"
+              onClick={inputChangeHandler}
+              type="button"
+            >
+              No
+            </button>
+          </div>
+          <label className={styles.label}>Address</label>
+          <textarea
+            className={styles.textarea}
+            name="address"
+            value={address}
+            onChange={inputChangeHandler}
+            required
+          />
+          {!geolocationEnabled && (
+            <div className={styles.flex}>
+              <div className={styles.formInputContainer}>
+                <label className={styles.label}>Latitude</label>
+                <input
+                  className={styles.formInputSmall}
+                  type="number"
+                  name="latitude"
+                  value={latitude}
+                  onChange={inputChangeHandler}
+                />
+              </div>
+
+              <div className={styles.formInputContainer}>
+                <label className={styles.label}>Longitude</label>
+                <input
+                  className={styles.formInputSmall}
+                  type="number"
+                  name="longitude"
+                  value={longitude}
+                  onChange={inputChangeHandler}
+                  required
+                />
+              </div>
+            </div>
+          )}
+          <label className={styles.label}>Offer</label>
+          <div className={styles.flex}>
+            <button
+              className={offer ? 'formBtnActive' : 'formBtn'}
+              value={true}
+              name="offer"
+              onClick={inputChangeHandler}
+              type="button"
+            >
+              Yes
+            </button>
+            <button
+              className={!offer && offer !== null ? 'formBtnActive' : 'formBtn'}
+              value={false}
+              name="offer"
+              onClick={inputChangeHandler}
+              type="button"
+            >
+              No
+            </button>
+          </div>
+          <label className={styles.label}>Regular Price</label>
+          <input
+            className={styles.formInputMedium}
+            type="number"
+            name="regularPrice"
+            value={regularPrice}
+            onChange={inputChangeHandler}
+            min="50"
+            max="750000000"
+            required
+          />
+          {type === 'rent' && <span className={styles.text}> / Per Month</span>}
+          {offer && (
+            <>
+              <label className={styles.label}>Discounted Price</label>
+              <input
+                className={styles.formInputMedium}
+                type="number"
+                name="discountedPrice"
+                value={discountedPrice}
+                onChange={inputChangeHandler}
+                min="50"
+                max="750000000"
+                required
+              />
+              {type === 'rent' && (
+                <span className={styles.text}> / Per Month</span>
+              )}
+            </>
+          )}
+          <label className={styles.label}>Images (6 max.)</label>{' '}
+          <input
+            className={styles.formFiles}
+            type="file"
+            onChange={inputChangeHandler}
+            accept=".jpg, .png, .jpeg"
+            required
+            multiple
+          />
+          <button className={styles.submitBtn} type="submit">
+            Edit Listing
           </button>
-          <button
-            className={!offer && offer !== null ? 'formBtnActive' : 'formBtn'}
-            value={false}
-            name="offer"
-            onClick={inputChangeHandler}
-            type="button"
-          >
-            No
-          </button>
-        </div>
-        <label className={styles.label}>Regular Price</label>
-        <input
-          className={styles.formInputMedium}
-          type="number"
-          name="regularPrice"
-          value={regularPrice}
-          onChange={inputChangeHandler}
-          min="50"
-          max="750000000"
-          required
-        />
-        {type === 'rent' && <span className={styles.text}> / Per Month</span>}
-        {offer && (
-          <>
-            <label className={styles.label}>Discounted Price</label>
-            <input
-              className={styles.formInputMedium}
-              type="number"
-              name="discountedPrice"
-              value={discountedPrice}
-              onChange={inputChangeHandler}
-              min="50"
-              max="750000000"
-              required
-            />
-            {type === 'rent' && (
-              <span className={styles.text}> / Per Month</span>
-            )}
-          </>
-        )}
-        <label className={styles.label}>Images (6 max.)</label>{' '}
-        <input
-          className={styles.formFiles}
-          type="file"
-          onChange={inputChangeHandler}
-          accept=".jpg, .png, .jpeg"
-          required
-          multiple
-        />
-        <button className={styles.submitBtn} type="submit">
-          Edit Listing
-        </button>
-      </form>
-    </PageContainer>
+        </form>
+      </PageContainer>
+    </>
   );
 };
 

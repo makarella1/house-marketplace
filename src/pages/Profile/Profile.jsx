@@ -121,77 +121,72 @@ const Profile = () => {
   };
 
   return (
-    <PageContainer>
+    <>
       <PageHeader title="My Profile" className={styles.header}>
         <button className={styles.logOutBtn} onClick={signOutHandler}>
           Log Out
         </button>
       </PageHeader>
-      <div className="flex justify-between items-center mb-6">
-        <p className="text-xl font-black">Profile Details</p>
-        <button
-          className="btn btn-sm btn-accent"
-          onClick={() => {
-            changeProfile && changeProfileHandler();
-            setChangeProfile((prevState) => !prevState);
-          }}
-        >
-          {changeProfile ? 'Done' : 'Change Name'}
-        </button>
-      </div>
-      <form className={styles.form}>
-        <div className="form-control w-full mb-4">
-          <label className="label">
-            <span className="label-text">Name</span>
-          </label>
-          <input
-            className={
-              changeProfile
-                ? 'input input-info text-lg font-semibold'
-                : 'input pointer-events-none text-lg font-semibold'
-            }
-            type="text"
-            name="name"
-            value={name}
-            onChange={inputChangeHandler}
-          />
+      <PageContainer>
+        <div className={styles.info}>
+          <p className={styles.details}>Profile Details</p>
+          <button
+            className={styles.changeBtn}
+            onClick={() => {
+              changeProfile && changeProfileHandler();
+              setChangeProfile((prevState) => !prevState);
+            }}
+          >
+            {changeProfile ? 'Done' : 'Change Name'}
+          </button>
         </div>
-        <div className="form-control w-full mb-4">
-          <label className="label">
-            <span className="label-text">Email</span>
-          </label>
-          <input
-            className="input text-lg font-semibold pointer-events-none"
-            type="text"
-            defaultValue={email}
-          />
-        </div>
-      </form>
-
-      <Link
-        className="rounded-lg p-4 shadow-lg flex justify-between items-center bg-primary"
-        to="/create-listing"
-      >
-        <AiFillHome size={20} />
-        <p className="font-bold">Rent or sell your home!</p>
-        <BsArrowRightShort size={20} />
-      </Link>
-
-      {userListings.length > 0 && (
-        <>
-          <p className="font-bold text-xl mt-6 mb-2">Your Listings</p>
-          {userListings.map((listing) => (
-            <ListingItem
-              listing={listing.data}
-              id={listing.id}
-              key={listing.id}
-              onDelete={deleteHandler}
-              onEdit={editHandler}
+        <form className={styles.form}>
+          <div className={styles.formControl}>
+            <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+            <input
+              className={
+                changeProfile
+                  ? `input ${styles.changeableText}`
+                  : `input ${styles.unchangeableText}`
+              }
+              type="text"
+              name="name"
+              value={name}
+              onChange={inputChangeHandler}
             />
-          ))}
-        </>
-      )}
-    </PageContainer>
+          </div>
+          <div className={styles.formControl}>
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input className={styles.input} type="text" defaultValue={email} />
+          </div>
+        </form>
+
+        <Link className={styles.createBtn} to="/create-listing">
+          <AiFillHome size={20} />
+          <p className="font-bold">Rent or sell your home!</p>
+          <BsArrowRightShort size={20} />
+        </Link>
+
+        {userListings.length > 0 && (
+          <>
+            <p className={styles.listingsHeader}>Your Listings</p>
+            {userListings.map((listing) => (
+              <ListingItem
+                listing={listing.data}
+                id={listing.id}
+                key={listing.id}
+                onDelete={deleteHandler}
+                onEdit={editHandler}
+              />
+            ))}
+          </>
+        )}
+      </PageContainer>
+    </>
   );
 };
 

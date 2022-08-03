@@ -1,0 +1,23 @@
+.title {
+  @apply text-xl font-bold mb-2;
+}
+
+.swiper {
+  @apply mb-4;
+}
+
+.image {
+  @apply h-96 w-full mx-auto rounded-lg relative cursor-pointer;
+}
+
+.badgeContainer {
+  @apply absolute bottom-10 left-5 flex flex-col lg:left-10;
+}
+
+.badgeName {
+  @apply badge badge-primary text-sm badge-lg font-black text-white lg:text-lg mb-2 lg:p-6;
+}
+
+.badgePrice {
+  @apply badge badge-success text-sm badge-lg font-black text-white lg:text-lg lg:p-6;
+}

@@ -53,19 +53,13 @@ const ListingItem = ({ listing, id, onDelete, onEdit }) => {
       </Link>
 
       {onDelete && (
-        <button
-          className="absolute right-0 top-1/2 -translate-y-1/2 btn btn-ghost btn-sm"
-          onClick={deleteHandler}
-        >
+        <button className={styles.actionBtn} onClick={deleteHandler}>
           <AiFillDelete color="red" size={16} />
         </button>
       )}
 
       {onEdit && (
-        <button
-          className="absolute right-10 top-1/2 -translate-y-1/2 btn btn-ghost btn-sm"
-          onClick={editHandler}
-        >
+        <button className={styles.actionBtnLeft} onClick={editHandler}>
           <FaPenAlt size={16} />
         </button>
       )}

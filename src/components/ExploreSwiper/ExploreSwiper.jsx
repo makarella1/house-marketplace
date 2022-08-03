@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/firebase.config';
 
@@ -9,8 +10,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
+import styles from './ExploreSwiper.module.scss';
+
 const ExploreSwiper = () => {
   const [listings, setListings] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -18,7 +22,7 @@ const ExploreSwiper = () => {
       const docSnap = await getDocs(docRef);
 
       let listings = [];
-      docSnap.forEach((doc) => listings.push(doc.data()));
+      docSnap.forEach((doc) => listings.push({ id: doc.id, data: doc.data() }));
 
       setListings(listings);
     };
@@ -26,33 +30,38 @@ const ExploreSwiper = () => {
     fetchListings();
   }, []);
 
+  const navigateHandler = (args) => {
+    const [type, id] = args;
+
+    navigate(`/categories/${type}/${id}`);
+  };
+
   return (
     <>
-      <h3 className="text-xl font-bold mb-2">Recommended</h3>
+      <h3 className={styles.title}>Recommended</h3>
       <Swiper
-        className="mb-4"
+        className={styles.swiper}
         slidesPerView={1}
         pagination={{ clickable: true }}
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         autoplay={{ delay: 3000 }}
       >
-        {listings?.map((listing, index) => {
+        {listings?.map(({ data, id }, index) => {
           return (
             <SwiperSlide key={index}>
               <div
                 style={{
-                  background: `url(${listing?.imageUrls[0]}) center no-repeat`,
+                  background: `url(${data?.imageUrls[0]}) center no-repeat`,
                   backgroundSize: 'cover',
                 }}
-                className="h-96 w-full mx-auto rounded-lg relative"
+                className={styles.image}
+                onClick={navigateHandler.bind(null, [data?.type, id])}
               >
-                <div className="absolute bottom-10 left-5 flex flex-col lg:left-10">
-                  <p className="badge badge-primary badge-lg font-black text-white text-lg mb-2 lg:p-6">
-                    {listing?.name}
-                  </p>
-                  <p className="badge badge-success badge-lg font-black text-white text-lg lg:p-6">
-                    ${listing?.regularPrice ?? listing?.discountedPrice}{' '}
-                    {listing?.type === 'rent' && '/ Per Month'}
+                <div className={styles.badgeContainer}>
+                  <p className={styles.badgeName}>{data?.name}</p>
+                  <p className={styles.badgePrice}>
+                    ${data?.regularPrice ?? data?.discountedPrice}{' '}
+                    {data?.type === 'rent' && '/ Per Month'}
                   </p>
                 </div>
               </div>

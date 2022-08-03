@@ -1,0 +1,39 @@
+.header {
+  @apply flex items-center justify-between;
+}
+
+.shareBtn {
+  @apply w-10 h-10 rounded-full flex items-center justify-center shadow-xl bg-white cursor-pointer ml-10;
+}
+
+.price {
+  @apply text-success font-bold text-2xl;
+}
+
+.location {
+  @apply font-bold text-lg;
+}
+
+.badgesContainer {
+  @apply mt-2 flex items-center mb-4;
+}
+
+.typeBadge {
+  @apply badge badge-warning badge-lg font-bold mr-2;
+}
+
+.priceBadge {
+  @apply badge badge-success badge-lg font-bold mr-2;
+}
+
+.listItem {
+  @apply font-bold;
+}
+
+.location {
+  @apply my-4 text-xl font-bold;
+}
+
+.contactBtn {
+  @apply w-full btn btn-primary text-white;
+}

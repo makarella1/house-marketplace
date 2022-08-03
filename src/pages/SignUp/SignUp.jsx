@@ -76,64 +76,66 @@ const SignUp = () => {
   };
 
   return (
-    <PageContainer>
+    <>
       <PageHeader title="Welcome Back!" />
-      <form className={styles.form} onSubmit={submitHandler}>
-        <div className={styles.formControl}>
-          <BsPenFill className={styles.icon} size={20} />
-          <input
-            className={styles.formInput}
-            type="text"
-            name="name"
-            value={name}
-            placeholder="Name"
-            onChange={inputChangeHandler}
-          />
-        </div>
-        <div className={styles.formControl}>
-          <BsFillPersonFill className={styles.icon} size={20} />
-          <input
-            className={styles.formInput}
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Email"
-            onChange={inputChangeHandler}
-          />
-        </div>
-        <div className={styles.formControl}>
-          <RiLockPasswordFill className={styles.icon} size={20} />
-          <input
-            className={styles.formInput}
-            type={showPassword ? 'text' : 'password'}
-            name="password"
-            value={password}
-            placeholder="Password"
-            onChange={inputChangeHandler}
-          />
-          <button
-            className={styles.iconRight}
-            onClick={passwordVisibilityHandler}
-            type="button"
-          >
-            <AiFillEye size={20} />
-          </button>
-        </div>
-        <div className={styles.actions}>
-          <p className={styles.actionsHeader}>Sign Up</p>
-          <button className={styles.actionsBtn} type="submit">
-            <BsArrowRightShort />
-          </button>
-        </div>
-        <div className={styles.textCenter}>
-          <Link className={styles.link} to="/sign-in">
-            Sign In Instead
-          </Link>
-        </div>
+      <PageContainer>
+        <form className={styles.form} onSubmit={submitHandler}>
+          <div className={styles.formControl}>
+            <BsPenFill className={styles.icon} size={20} />
+            <input
+              className={styles.formInput}
+              type="text"
+              name="name"
+              value={name}
+              placeholder="Name"
+              onChange={inputChangeHandler}
+            />
+          </div>
+          <div className={styles.formControl}>
+            <BsFillPersonFill className={styles.icon} size={20} />
+            <input
+              className={styles.formInput}
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Email"
+              onChange={inputChangeHandler}
+            />
+          </div>
+          <div className={styles.formControl}>
+            <RiLockPasswordFill className={styles.icon} size={20} />
+            <input
+              className={styles.formInput}
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              value={password}
+              placeholder="Password"
+              onChange={inputChangeHandler}
+            />
+            <button
+              className={styles.iconRight}
+              onClick={passwordVisibilityHandler}
+              type="button"
+            >
+              <AiFillEye size={20} />
+            </button>
+          </div>
+          <div className={styles.actions}>
+            <p className={styles.actionsHeader}>Sign Up</p>
+            <button className={styles.actionsBtn} type="submit">
+              <BsArrowRightShort />
+            </button>
+          </div>
+          <div className={styles.textCenter}>
+            <Link className={styles.link} to="/sign-in">
+              Sign In Instead
+            </Link>
+          </div>
 
-        <OAuth />
-      </form>
-    </PageContainer>
+          <OAuth />
+        </form>
+      </PageContainer>
+    </>
   );
 };
 

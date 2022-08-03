@@ -1,0 +1,11 @@
+.alertContainer {
+  @apply toast bottom-16 right-0 z-[1000] lg:bottom-20 lg:right-5;
+}
+
+.alert {
+  @apply bg-success flex items-center justify-center p-6 rounded-xl;
+}
+
+.text {
+  @apply font-bold;
+}

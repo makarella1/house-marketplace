@@ -37,3 +37,11 @@
 .subInfoText {
   @apply font-semibold text-sm;
 }
+
+.actionBtn {
+  @apply absolute right-0 top-1/2 -translate-y-1/2 btn btn-ghost btn-sm;
+}
+
+.actionBtnLeft {
+  @apply absolute right-10 top-1/2 -translate-y-1/2 btn btn-ghost btn-sm;
+}

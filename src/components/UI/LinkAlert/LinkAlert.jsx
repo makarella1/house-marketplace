@@ -1,9 +1,11 @@
+import styles from './LinkAlert.module.scss';
+
 const LinkAlert = () => {
   return (
-    <div className="toast bottom-16 right-0 z-[1000] lg:bottom-20 lg:right-5">
-      <div className="alert alert-sucess">
+    <div className={styles.alertContainer}>
+      <div className={styles.alert}>
         <div>
-          <span className="font-bold">
+          <span className={styles.text}>
             The link was copied to your clipboard!
           </span>
         </div>
