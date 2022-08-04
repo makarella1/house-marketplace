@@ -1,0 +1,7 @@
+.container {
+  @apply absolute top-1/2 -translate-y-1/2 flex items-center justify-center w-full;
+}
+
+.text {
+  @apply font-black text-4xl;
+}

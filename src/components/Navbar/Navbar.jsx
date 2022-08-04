@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { MdOutlineLocalOffer, MdOutlineExplore } from 'react-icons/md';
@@ -20,21 +21,21 @@ const Navbar = () => {
   return (
     <nav className={styles.nav}>
       <button
-        className={`${matchPath('/profile') ? 'active' : ''}`}
+        className={`${matchPath('/profile') ? `${styles.active}` : ''}`}
         onClick={() => navigate('/profile')}
       >
         <BsPerson size={24} />
         <span className={styles.label}>Profile</span>
       </button>
       <button
-        className={`${matchPath('/offers') ? 'active' : ''}`}
+        className={`${matchPath('/offers') ? `${styles.active}` : ''}`}
         onClick={() => navigate('/offers')}
       >
         <MdOutlineLocalOffer size={24} />
         <span className={styles.label}>Offers</span>
       </button>
       <button
-        className={`${matchPath('/') ? 'active' : ''}`}
+        className={`${matchPath('/') ? `${styles.active}` : ''}`}
         onClick={() => navigate('/')}
       >
         <MdOutlineExplore size={24} />
@@ -44,4 +45,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

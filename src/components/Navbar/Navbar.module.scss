@@ -1,7 +1,11 @@
 .nav {
-  @apply z-[9999] btm-nav drop-shadow-2xl;
+  @apply btm-nav drop-shadow-2xl z-[9999];
 }
 
 .label {
   @apply btm-nav-label;
+}
+
+.active {
+  //DaisyUI is stupid I'll never use it again
 }

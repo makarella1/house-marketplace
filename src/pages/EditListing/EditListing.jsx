@@ -64,21 +64,19 @@ const EditListing = () => {
   const { currentUser } = getAuth();
 
   useEffect(() => {
-    if (listing && listing.userRef !== auth.currentUser?.uid) {
-      showToast('error', "You can't edit this listing");
-      navigate('/');
-    }
-  }, []);
-
-  useEffect(() => {
     const fetchListing = async () => {
       const docRef = doc(db, 'listings', listingId);
 
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setListing(docSnap.data());
-        setForm({ ...docSnap.data(), address: docSnap.data().location });
+        if (docSnap.data().userRef !== currentUser?.uid) {
+          showToast('error', "You can't edit this listing");
+          navigate('/');
+        } else {
+          setListing(docSnap.data());
+          setForm({ ...docSnap.data(), address: docSnap.data().location });
+        }
       } else {
         showToast('There is no listings with such an ID!');
         navigate('/');
@@ -89,7 +87,7 @@ const EditListing = () => {
   }, []);
 
   useEffect(() => {
-    setForm({ ...form, userRef: currentUser.uid });
+    setForm({ ...form, userRef: currentUser?.uid });
   }, [setForm]);
 
   const submitHandler = async (event) => {
