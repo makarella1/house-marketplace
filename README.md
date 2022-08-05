@@ -36,7 +36,7 @@ properly: didn't write any DB rules or my indexes were invalid etc. (that was ki
 <br />
 Talking about another new library that I've used - DaisyUI. To cut the long story short, I didn't like it. 
 It's impossible to use it in combination with Tailwind and CSS modules. It pushed me to write weird code just to make it work. Frankly speaking, I feel that component
-libraries are not my thing, I'll probably never use DaisyUI again, not to mention MUI. 
+libraries are not my thing, I'll probably never use DaisyUI again. 
 <br />
 <br />
 However, I enjoyed the process of learning new tools and consolidating my previous knowledge, the project itself was exciting. 
